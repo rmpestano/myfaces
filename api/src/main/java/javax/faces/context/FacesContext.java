@@ -463,7 +463,7 @@ public abstract class FacesContext
      * @since 2.2
      * @return 
      */
-    public char getNamingContainerSeparatorChar()
+    public Character getNamingContainerSeparatorChar()
     {
         FacesContext ctx = firstInstance.get();
         

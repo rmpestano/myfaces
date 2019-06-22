@@ -71,6 +71,7 @@ public class StartupServletContextListener implements ServletContextListener
     @Override
     public void contextInitialized(ServletContextEvent event)
     {
+        log.info("start contextInitialized...");
         if (_servletContext != null)
         {
             throw new IllegalStateException("context is already initialized");

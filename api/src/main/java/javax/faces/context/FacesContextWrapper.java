@@ -266,7 +266,7 @@ public abstract class FacesContextWrapper extends FacesContext implements FacesW
     }
 
     @Override
-    public char getNamingContainerSeparatorChar()
+    public Character getNamingContainerSeparatorChar()
     {
         return getWrapped().getNamingContainerSeparatorChar();
     }

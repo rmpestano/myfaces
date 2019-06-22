@@ -95,7 +95,7 @@ public class MockFacesContext extends MockFacesContext20
     }
     
     @Override
-    public char getNamingContainerSeparatorChar()
+    public Character getNamingContainerSeparatorChar()
     {
         if (_separatorChar == null)
         {

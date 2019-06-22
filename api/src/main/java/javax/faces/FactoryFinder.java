@@ -287,6 +287,7 @@ public final class FactoryFinder
         synchronized (registeredFactoryNames)
         {
             factoryClassNames = registeredFactoryNames.get(classLoader);
+            LOGGER.info("factoryClassNames: "+factoryClassNames);
 
             if (factoryClassNames == null)
             {
@@ -553,6 +554,7 @@ public final class FactoryFinder
 
     public static void setFactory(String factoryName, String implName)
     {
+        LOGGER.info("setFactory - name: "+factoryName + " - impl: "+implName);
         if (factoryName == null)
         {
             throw new NullPointerException("factoryName may not be null");
@@ -752,14 +754,17 @@ public final class FactoryFinder
     {
         try
         {
+            Logger log = Logger.getLogger(FactoryFinder.class.getName());
             ClassLoader classLoader = null;
             if (System.getSecurityManager() != null)
             {
+                log.info("getClassLoader - 1");
                 classLoader = (ClassLoader) AccessController.doPrivileged(
                         (PrivilegedExceptionAction) () -> Thread.currentThread().getContextClassLoader());
             }
             else
             {
+                log.info("getClassLoader - 2");
                 classLoader = Thread.currentThread().getContextClassLoader();
             }
             

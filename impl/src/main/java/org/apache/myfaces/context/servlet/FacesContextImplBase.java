@@ -366,7 +366,7 @@ public abstract class FacesContextImplBase extends FacesContext
     }
 
     @Override
-    public char getNamingContainerSeparatorChar()
+    public Character getNamingContainerSeparatorChar()
     {
         if (_separatorChar == null)
         {
