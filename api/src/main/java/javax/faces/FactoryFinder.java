@@ -643,6 +643,8 @@ public final class FactoryFinder
 
     public static void releaseFactories() throws FacesException
     {
+        LOGGER.info("Releasing factories: ");
+
         initializeFactoryFinderProviderFactory();
         
         if (factoryFinderProviderFactoryInstance == null)
@@ -695,6 +697,7 @@ public final class FactoryFinder
         // This code must be synchronized
         synchronized (registeredFactoryNames)
         {
+            LOGGER.info("Releasing factories from cl: "+classLoader);
             factoryMap = factories.remove(classLoader);
 
             // _registeredFactoryNames has as value type Map<String,List> and this must
@@ -702,6 +705,7 @@ public final class FactoryFinder
             Map<String, List<String>> factoryClassNames = registeredFactoryNames.get(classLoader);
             if (factoryClassNames != null)
             {
+                LOGGER.info("Clearing factories names: "+factoryClassNames);
                 factoryClassNames.clear();
             }
 

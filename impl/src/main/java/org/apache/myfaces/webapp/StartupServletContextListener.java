@@ -130,6 +130,7 @@ public class StartupServletContextListener implements ServletContextListener
                 _facesInitializer.destroyShutdownFacesContext(facesContext);
             }
 
+            log.info("Releasing factories...");
             FactoryFinder.releaseFactories();
 
             //DiscoverSingleton.release(); //clears EnvironmentCache and prevents leaking classloader references
