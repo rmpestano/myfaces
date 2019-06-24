@@ -286,6 +286,13 @@ public final class FactoryFinder
 
         synchronized (registeredFactoryNames)
         {
+            LOGGER.info("registeredFactoryNames: "+registeredFactoryNames);
+            for (Map.Entry<ClassLoader, Map<String, List<String>>> entry : registeredFactoryNames.entrySet())
+            {
+                LOGGER.info("cl:"+entry.getKey());
+                LOGGER.info("value:"+entry.getValue());
+            }
+            LOGGER.info("Current classLoader: "+classLoader.toString());
             factoryClassNames = registeredFactoryNames.get(classLoader);
             LOGGER.info("factoryClassNames: "+factoryClassNames);
 
