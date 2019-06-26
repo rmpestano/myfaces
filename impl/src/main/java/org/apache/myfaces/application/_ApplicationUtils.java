@@ -22,6 +22,8 @@ package org.apache.myfaces.application;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.FacesException;
 import javax.faces.context.FacesContext;
 import javax.faces.event.SystemEvent;
@@ -33,10 +35,13 @@ import javax.faces.event.SystemEventListener;
  */
 class _ApplicationUtils
 {
+    private static final Logger LOGGER = Logger.getLogger(_ApplicationUtils.class.getName());
     
     static SystemEvent _createEvent(FacesContext facesContext, Class<? extends SystemEvent> systemEventClass,
             Object source, SystemEvent event)
     {
+        LOGGER.info("Creating event for systemEventClass: "+
+                systemEventClass + " SystemEvent: "+event + " Source: "+source);
         if (event == null)
         {
             try
@@ -51,36 +56,42 @@ class _ApplicationUtils
                     {
                         // Safe cast, since the constructor belongs
                         // to a class of type SystemEvent
+                        LOGGER.info("1");
                         constructor = (Constructor<? extends SystemEvent>) c;
                         break;
                     }
                 }
                 if (constructor != null)
                 {
+                    LOGGER.info("2");
                     event = constructor.newInstance(facesContext, source);
                 }
                 
                 // try to lookup the old 1 parameter constructor
                 if (constructor == null)
                 {
+                    LOGGER.info("3");
                     for (Constructor<?> c : constructors)
                     {
                         if (c.getParameterTypes().length == 1)
                         {
                             // Safe cast, since the constructor belongs
                             // to a class of type SystemEvent
+                            LOGGER.info("3.1");
                             constructor = (Constructor<? extends SystemEvent>) c;
                             break;
                         }
                     }
                     if (constructor != null)
                     {
+                         LOGGER.info("4");
                         event = constructor.newInstance(source);
                     }
                 }
             }
             catch (Exception e)
             {
+                LOGGER.log(Level.SEVERE, "", e);
                 throw new FacesException("Couldn't instanciate system event of type " + 
                         systemEventClass.getName(), e);
             }
