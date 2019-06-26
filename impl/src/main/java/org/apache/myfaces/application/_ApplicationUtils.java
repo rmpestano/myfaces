@@ -58,6 +58,7 @@ class _ApplicationUtils
                         // to a class of type SystemEvent
                         LOGGER.info("1");
                         constructor = (Constructor<? extends SystemEvent>) c;
+                        LOGGER.info("Constructor found: "+constructor);
                         break;
                     }
                 }
@@ -65,6 +66,7 @@ class _ApplicationUtils
                 {
                     LOGGER.info("2");
                     event = constructor.newInstance(facesContext, source);
+                    LOGGER.info("Constructor found: "+constructor);
                 }
                 
                 // try to lookup the old 1 parameter constructor
@@ -79,13 +81,15 @@ class _ApplicationUtils
                             // to a class of type SystemEvent
                             LOGGER.info("3.1");
                             constructor = (Constructor<? extends SystemEvent>) c;
+                            LOGGER.info("Constructor found: "+constructor);
                             break;
                         }
                     }
                     if (constructor != null)
                     {
-                         LOGGER.info("4");
+                        LOGGER.info("4");
                         event = constructor.newInstance(source);
+                        LOGGER.info("Event created: "+event);
                     }
                 }
             }
@@ -96,7 +100,7 @@ class _ApplicationUtils
                         systemEventClass.getName(), e);
             }
         }
-
+        LOGGER.info("Returning event: "+event);
         return event;
     }
 
